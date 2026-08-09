@@ -16,15 +16,21 @@ spring:
               predicates:
                 - Path=/auth/**
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+            - id: student-service
+              uri: lb://STUDENT-SERVICE
+              predicates:
+                - Path=/students/**
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
 jwt:
   secret: ${JWT_SECRET}
